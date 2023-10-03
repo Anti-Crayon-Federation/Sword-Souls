@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class PlayerDetection : MonoBehaviour
 {
-    // Player Object
+    // This is the tag of your player object
     public string playerTag = "Player";
-    // Detection Indicator
     public Color highlightColor = Color.yellow; 
+    public bool enableHighlight = true; 
     private Color originalColor; 
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer; 
 
     // Start is called before the first frame update
     void Start()
     {
         // Dont "fuc***g" use this 
+        // Docs are A** 
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     // This function is called when another object enters the trigger collider
@@ -31,7 +26,10 @@ public class PlayerDetection : MonoBehaviour
         if (other.gameObject.CompareTag(playerTag))
         {
             Debug.Log("Player has entered the area");
-            spriteRenderer.color = highlightColor;
+            if (enableHighlight)
+            {
+                spriteRenderer.color = highlightColor;
+            }
         }
     }
 
@@ -41,7 +39,10 @@ public class PlayerDetection : MonoBehaviour
         if (other.gameObject.CompareTag(playerTag))
         {
             Debug.Log("Player has left the area");
-            spriteRenderer.color = originalColor;
+            if (enableHighlight)
+            {
+                spriteRenderer.color = originalColor;
+            }
         }
     }
 }
