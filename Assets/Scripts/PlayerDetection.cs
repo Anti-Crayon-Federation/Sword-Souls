@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerDetection : MonoBehaviour
 {
-    // This is the tag of your player object
     public string playerTag = "Player";
-    public Color highlightColor = Color.yellow; 
-    public bool enableHighlight = true; 
-    private Color originalColor; 
-    private SpriteRenderer spriteRenderer; 
+    public Color highlightColor = Color.yellow;
+    public bool enableHighlight = true;
+    private Color originalColor;
+    private SpriteRenderer spriteRenderer;
+    private bool isPlayerInside = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,7 @@ public class PlayerDetection : MonoBehaviour
         if (other.gameObject.CompareTag(playerTag))
         {
             Debug.Log("Player has entered the area");
+            isPlayerInside = true;
             if (enableHighlight)
             {
                 spriteRenderer.color = highlightColor;
@@ -39,10 +40,17 @@ public class PlayerDetection : MonoBehaviour
         if (other.gameObject.CompareTag(playerTag))
         {
             Debug.Log("Player has left the area");
+            isPlayerInside = false;
             if (enableHighlight)
             {
                 spriteRenderer.color = originalColor;
             }
         }
+    }
+
+    // This method allows other scripts to check if the player is inside the area
+    public bool IsPlayerInside()
+    {
+        return isPlayerInside;
     }
 }
