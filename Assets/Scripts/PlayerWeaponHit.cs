@@ -28,6 +28,7 @@ public class playerWeaponHit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Attack Went Nowhere");
         lifeTime -= Time.deltaTime;
         //if the attack goes a certain amount of time without hitting anything, it despawns
         if (lifeTime <= 0f)
