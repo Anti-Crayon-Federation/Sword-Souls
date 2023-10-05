@@ -5,6 +5,9 @@ using UnityEngine;
 public class Enemy : EnemyStateManager
 {
     // Start is called before the first frame update
+
+    public float health;
+
     public override void Start()
     {
         base.Start();
