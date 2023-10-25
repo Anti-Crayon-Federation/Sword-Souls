@@ -6,7 +6,7 @@ public class playerWeaponHit : MonoBehaviour
 {
     // how long does the attack exist, how much damage does it do, create collider
     public float lifeTime;
-    public float damage;
+    public int damage;
     public BoxCollider2D attackHit;
     public bool disappear;
     public float invincibilityFrames;
