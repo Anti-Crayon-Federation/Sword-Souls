@@ -20,12 +20,11 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMipmapLimit: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -64,7 +63,6 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -243,14 +241,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CogB4x4_a_0: -1910478372
       CogB4x4_a_1: 483235739
-      CogB4x4_a_2: 1459015490
+      CogB4x4_a_0: -1910478372
       CogB4x4_a_3: -481205898
-      CogB4x4_a_4: 1970239172
       CogB4x4_a_5: -629590023
-  mipmapLimitGroupName: 
+      CogB4x4_a_4: 1970239172
+      CogB4x4_a_2: 1459015490
+  spritePackingTag: 
   pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

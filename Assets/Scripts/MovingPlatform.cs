@@ -6,7 +6,7 @@ public class MovingPlatform : MonoBehaviour
 {
     public Vector3 position1;
     public Vector3 position2;
-    public float speed;
+    public float speed=5;
     public float stopTime;
     bool reachedPosition1;
     bool reachedPosition2;
@@ -18,6 +18,8 @@ public class MovingPlatform : MonoBehaviour
         reachedPosition1 = false;
         reachedPosition2 = false;
         stopCountdown = stopTime;
+        position1 = transform.GetChild(0).position;
+        position2 = transform.GetChild(1).position;
     }
 
     // Update is called once per frame

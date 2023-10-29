@@ -18,14 +18,20 @@ public class PlayerAttack : MonoBehaviour
     public float projectileSpeed = 0f;
     public PlayerStateManager player;
     private List<Enemy> hitEnemies = new List<Enemy>();
-    private float knockbackForce = 40f;
 
     // Start is called before the first frame update
     void Start()
     {
         //immediately define hitbox
         attackHit = gameObject.AddComponent<BoxCollider2D>();
-        attackHit.size = new Vector2(1, 1);
+        if (projectileSpeed != 0f)
+        {
+            attackHit.size = new Vector2(1f, 1f);
+        }
+        else
+        {
+            attackHit.size = new Vector2(2.25f, 1.75f);
+        }
         attackHit.isTrigger = true;
     }
 
@@ -55,15 +61,15 @@ public class PlayerAttack : MonoBehaviour
             if (disappear == true)
             {
                 hitEnemies.Add(e);
-                e.TakeDamange(1);
+                e.TakeDamange(1, player.gameObject);
                 Debug.Log(e.health);
                 //Debug.Log("destroy attack");
-                //Destroy(gameObject);
+                Destroy(gameObject);
             }
             else
             {
                 //if the attack has the other type, it only despawns when lifeTime runs out
-                e.TakeDamange(1);
+                e.TakeDamange(1, player.gameObject);
 
                 target = e;
                 Debug.Log(e.health);
@@ -80,7 +86,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (projectileSpeed == 0f && player.transform.position.y > transform.position.y && player.isKnockedBack <= 0f)
         {
-            player.ApplyKnockback((player.transform.position - transform.position).normalized * knockbackForce);
+            if (collision.gameObject.layer != 2)
+            {
+                // Pogo down
+                player.GetComponent<Knockbackable>().ApplyKnockback((player.transform.position - transform.position).normalized * player.GetComponent<Knockbackable>().knockbackForce);
+            }
         }
     }
 

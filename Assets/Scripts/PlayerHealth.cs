@@ -6,10 +6,11 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 4;
     public int currentHealth;
-    public GameOverScreen gameOverScreen;
+    public GameObject gameOverScreen;
     public Vector2 lastCheckpoint;
     public float isInvincible = 0f;
     private SpriteRenderer sr;
+    private float gameOverTime=0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +37,18 @@ public class PlayerHealth : MonoBehaviour
             sr.color = new Color(1, 1, 1, 1); 
         }
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
             Debug.Log("You died");
-            gameOverScreen.gameObject.SetActive(true);
+            /*gameOverScreen.SetActive(true);
+            GetComponent<PlayerStateManager>().playerRigidbody.velocity = Vector2.zero;
+            gameOverTime -= Time.deltaTime;
+            if((Input.anyKey||Input.GetAxisRaw("Horizontal")!=0||Input.GetAxisRaw("Vertical")!=0||Input.GetButton("Jump")||Input.GetButton("Dash")) && gameOverTime<=0)
+            {
+                gameOverScreen.SetActive(false);*/
             ResetPlayer();
+                //gameOverTime = 0.5f;
+            //}
 
             //Possible death animation
             //Fail state
@@ -55,7 +63,39 @@ public class PlayerHealth : MonoBehaviour
             isInvincible = 0.8f;
             sr.color = new Color(1, 1, 1, 0.35f);
         }
-
-        
     }
+    
+    void ContactDamage(Collision2D collision)
+    {
+        Enemy e = collision.gameObject.GetComponent<Enemy>();
+        if (e != null)
+        {
+            switch (e.type)
+            {
+                case EnemyType.Standard:
+                    //Debug.Log("Hit by standard enemy touch");
+                    TakeDamange(1);
+                    break;
+                case EnemyType.Bomb:
+                    Debug.Log("Hit by bomb touch");
+                    break;
+                case EnemyType.Boss:
+                    Debug.Log("Hit by boss touch");
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        ContactDamage(collision);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        ContactDamage(collision);
+    }
+
 }

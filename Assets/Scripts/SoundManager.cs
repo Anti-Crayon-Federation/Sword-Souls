@@ -7,6 +7,10 @@ public class SoundManager : MonoBehaviour
     public AudioSource soundPlayerWinState;
     public AudioSource soundFootstep;
 
+    public AudioSource soundPlayerJump;
+    public AudioSource soundPlayerDash;
+    public AudioSource soundPlayerWalk;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +21,16 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlaySound(AudioSource _sound)
+    {
+        _sound.Play();
+    }
+
+    public void PlaySound(AudioSource _sound, float _trimStart)
+    {
+        _sound.time = _trimStart;
+        _sound.Play();
     }
 }

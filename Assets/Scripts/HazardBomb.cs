@@ -71,7 +71,7 @@ public class HazardBomb : MonoBehaviour
             Enemy e = collision.GetComponent<Enemy>();
             if (e != null)
             {
-                e.TakeDamange(explosionDamage);
+                e.TakeDamange(explosionDamage, gameObject);
                 Debug.Log(e.health);
                 Debug.Log("attack hit enemy");
             }

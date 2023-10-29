@@ -21,16 +21,20 @@ public class PlayerDetection : MonoBehaviour
     }
 
     // This function is called when another object enters the trigger collider
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag(playerTag))
         {
-            Debug.Log("Player has entered the area");
             isPlayerInside = true;
             if (enableHighlight)
             {
                 spriteRenderer.color = highlightColor;
             }
+            
+        }
+        else
+        {
+            isPlayerInside = false;
         }
     }
 

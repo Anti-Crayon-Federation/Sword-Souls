@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Animation;
+//using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class CharacterJump : MonoBehaviour
@@ -17,7 +17,7 @@ public class CharacterJump : MonoBehaviour
     /*[SerializeField, Range(2f, 5.5f)][Tooltip("Maximum jump height")]                                               */ private float jumpHeight = 3.2f;
     /*[SerializeField, Range(0.2f, 1.25f)][Tooltip("How long it takes to reach that height before coming back down")] */ private float timeToJumpApex = 2.3f / 10f;
     /*[SerializeField, Range(0f, 5f)][Tooltip("Gravity multiplier to apply when going up")]                           */ private float upwardMovementMultiplier = 1f;
-    /*[SerializeField, Range(1f, 10f)][Tooltip("Gravity multiplier to apply when coming down")]                       */ private float downwardMovementMultiplier = 3f;
+    /*[SerializeField, Range(1f, 10f)][Tooltip("Gravity multiplier to apply when coming down")]                       */ private float downwardMovementMultiplier = 1f;
     /*[SerializeField, Range(0, 1)][Tooltip("How many times can you jump in the air?")]                               */ private int maxAirJumps = 0;
                                                                                                                         
     [Header("Options")]                                                                                                 
@@ -256,6 +256,7 @@ public class CharacterJump : MonoBehaviour
             velocity.y += jumpSpeed;
             currentlyJumping = true;
             playerState.animator.SetBool("playJump", true);
+            playerState.sm.PlaySound(playerState.sm.soundPlayerJump, 0.5f);
 
 
             //if (juice != null)

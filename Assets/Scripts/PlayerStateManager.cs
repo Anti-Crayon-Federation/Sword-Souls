@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -9,6 +9,9 @@ public enum PlayerState { Idle, Walking, Dashing}
 
 public class PlayerStateManager : MonoBehaviour
 {
+    // Audio
+    public SoundManager sm;
+
     // Misc.
     public PlayerHealth h;
     public Rigidbody2D playerRigidbody;
@@ -62,6 +65,7 @@ public class PlayerStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sm = FindObjectOfType<SoundManager>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         capCollider = GetComponent<CapsuleCollider2D>();
@@ -78,7 +82,7 @@ public class PlayerStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = new Vector3(1, 2, 1);
+        transform.localScale = new Vector3(1, 1, 1);
         transform.rotation = Quaternion.identity;
 
         ExecuteState();
@@ -91,7 +95,10 @@ public class PlayerStateManager : MonoBehaviour
 
         if (dashTime <= 0)// && playerGround.GetOnGround())
         {
-            canDash = true;
+            if (playerGround.GetOnGround())
+            {
+                canDash = true;
+            }
         }
         else if (dashTime > 0)
         {
@@ -152,11 +159,6 @@ public class PlayerStateManager : MonoBehaviour
                 dashTime = dashCooldown;
                 ChangeStateTo(PlayerState.Dashing);
             }
-        }
-
-        if (Input.GetKeyDown("r"))
-        {
-            h.ResetPlayer();
         }
     }
 
@@ -382,25 +384,6 @@ public class PlayerStateManager : MonoBehaviour
         //{
         //    playerRigidbody.velocity = clampValue;
         //}
-    }
-
-    public void ApplyKnockback(Vector2 _force)
-    {
-        isKnockedBack = 0.2f;
-        Vector2 editedVelocity = playerRigidbody.velocity;
-        if (_force.x != 0f)
-        {
-            editedVelocity.x = _force.x;
-        }
-
-        if (_force.y != 0f)
-        {
-            editedVelocity.y = _force.y;
-        }
-
-        playerRigidbody.velocity = editedVelocity;
-
-        //playerRigidbody.AddForce(_force);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

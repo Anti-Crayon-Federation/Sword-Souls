@@ -4,8 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public enum EnemyState { Spawn, Idle, PatrolArea, GoToPlayer, Attack1, Death }
-public enum EnemyType { Standard, Bomb, Boss }
+public enum EnemyState { Spawn, Idle, PatrolArea, GoToPlayer, Attack1, Death, AttackWindup }
+public enum EnemyType { Standard, Bomb, Boss, ChageKnight }
 
 public class EnemyStateManager : MonoBehaviour
 {
@@ -32,7 +32,17 @@ public class EnemyStateManager : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        sr.color = Color.white;
+
+        if (type == EnemyType.ChageKnight)
+        {
+            animator = GetComponentInChildren<Animator>();
+            sr = GetComponentInChildren<SpriteRenderer>();
+        }
+
+        if (sr)
+        {
+            sr.color = Color.white;
+        }
     }
 
     // Update is called once per frame
@@ -87,7 +97,7 @@ public class EnemyStateManager : MonoBehaviour
                 break;
             case EnemyState.GoToPlayer:
 
-                transform.position = new Vector3(transform.position.x + (10f * Time.deltaTime), transform.position.y);
+                transform.position = new Vector3(transform.position.x + (5f * Time.deltaTime), transform.position.y);
 
                 if (detectionArea.isPlayerInside)
                 {
@@ -99,11 +109,24 @@ public class EnemyStateManager : MonoBehaviour
                 }
                 break;
             case EnemyState.Attack1:
-                transform.position = new Vector3(transform.position.x + (-10f * Time.deltaTime), transform.position.y);
+                transform.position = new Vector3(transform.position.x + (-5f * Time.deltaTime), transform.position.y);
 
                 break;
             case EnemyState.Death:
                 break;
+            case EnemyState.AttackWindup:
+                ToggleShake(true);
+                break;
+        }
+    }
+
+    private void ToggleShake(bool _value)
+    {
+        Shaker s = GetComponentInChildren<Shaker>();
+
+        if (s)
+        {
+            s.shakeEnabled = _value;
         }
     }
 
@@ -127,7 +150,7 @@ public class EnemyStateManager : MonoBehaviour
         }
         //ChangeState(previousState);
 
-        Debug.Log("Changing state to" + newState);
+        //Debug.Log("Changing state to" + newState);
         ChangeState(newState);
     }
 
@@ -135,6 +158,7 @@ public class EnemyStateManager : MonoBehaviour
     {
         noTimer = false;
         stateLifeTimeTotal = 1f; // State lasts 1 second by default
+        ToggleShake(false);
 
         if (currentState != _newState)
         {

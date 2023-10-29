@@ -25,7 +25,7 @@ public class DetectionArea : MonoBehaviour
 
         if (player != null)
         {
-            Debug.Log("Player has entered the area");
+            //Debug.Log("Player has entered the area");
             isPlayerInside = true;
             spottedAtLocation = player.transform.position;
             if (enableHighlight)
@@ -41,7 +41,7 @@ public class DetectionArea : MonoBehaviour
 
         if (player != null)
         {
-            Debug.Log("Player has left the area");
+            //Debug.Log("Player has left the area");
             isPlayerInside = false;
             spottedAtLocation = transform.position;
             if (enableHighlight)

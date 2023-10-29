@@ -34,14 +34,23 @@ public class Enemy : EnemyStateManager
         base.DetermineNextState();
     }
 
-    public void TakeDamange(int amount)
+    public void TakeDamange(int _amount, GameObject _source)
     {
-        health -= amount;
+        health -= _amount;
         takeDamageTimer = 0.1f;
-
-        if (health == 0)
+        
+        if (health <= 0)
         {
             ChangeState(EnemyState.Death);
+        }
+
+        Knockbackable k = GetComponent<Knockbackable>();
+
+        if (k != null)
+        {
+            Vector2 force = (transform.position - _source.transform.position).normalized * k.knockbackForce;
+            force.y = 0f;
+            k.ApplyKnockback(force);
         }
     }
 }

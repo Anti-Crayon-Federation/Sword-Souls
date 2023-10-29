@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 24880044373350054}
   - component: {fileID: 24880044373350057}
   - component: {fileID: 4800808964228326629}
-  - component: {fileID: 4961997522368141226}
+  - component: {fileID: 4275716830498594382}
   m_Layer: 0
   m_Name: Door Button
   m_TagString: Untagged
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4961997522368141226
+--- !u!114 &4275716830498594382
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,9 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 24880044373350059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891085ea76662ae4c9c5fc4eb0936329, type: 3}
+  m_Script: {fileID: 11500000, guid: 589fc07fe69f6e44f9bceafbfce6a0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorToOpen: {fileID: 0}
-  PlayerTag: Player
-  isPlayerInside: 0
+  _doorBehaviour: {fileID: 0}
