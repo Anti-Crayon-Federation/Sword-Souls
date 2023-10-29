@@ -24,7 +24,6 @@ public class ProjectileSystem : MonoBehaviour
     void Update()
     {
         float distance = Vector2.Distance(transform.position, player.transform.position);
-        Debug.Log(distance);
 
         // Set the radius of the CircleCollider2D to the distance value
         detectionRadius.radius = Mathf.Min(distance, maxDetectionDistance);
