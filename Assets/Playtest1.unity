@@ -17434,7 +17434,8 @@ MonoBehaviour:
   bullet: {fileID: 867772191255244865, guid: 91e2509ed2756e243bc54b543b5b37f9, type: 3}
   bulletPos: {fileID: 608740658}
   maxDetectionDistance: 7
-  detectionRadius: {fileID: 1829887334}
+  bulletSpeed: 5
+  spawnInterval: 1
 --- !u!58 &1829887334
 CircleCollider2D:
   m_ObjectHideFlags: 0

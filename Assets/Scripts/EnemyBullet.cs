@@ -10,6 +10,7 @@ public class EnemyBullet : MonoBehaviour
     private Rigidbody2D rb;
     // Lifetime of the EnemyBullet
     private float shelflife;
+    private float totalLifeTime = 5f;
 
     public float force;
     // Start is called before the first frame update
@@ -35,7 +36,7 @@ public class EnemyBullet : MonoBehaviour
         // Destroys The Game Object if enough time has passed
         shelflife += Time.deltaTime;
 
-        if(shelflife > 10)
+        if(shelflife > totalLifeTime)
         {
             Destroy(gameObject);
         }
