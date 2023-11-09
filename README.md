@@ -9,3 +9,4 @@ A Game Project of some sort
 # How to load levels
 
 Level Data is in Level Data > Level Dat
+this load method is obsolete please check the [Itch.Io](https://deep-sealed.itch.io/deep-sealed) page
