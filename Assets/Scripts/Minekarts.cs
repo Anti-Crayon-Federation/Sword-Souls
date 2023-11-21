@@ -14,6 +14,7 @@ public class Minekarts : MonoBehaviour
     GameObject karts2;
     GameObject karts3;
     GameObject karts4;
+    GameObject karts5;
     Vector3 begin;
     Vector3 end;
     bool despawning = false;
@@ -25,6 +26,7 @@ public class Minekarts : MonoBehaviour
         karts2= gameObject.transform.Find("Karts (1)").gameObject;
         karts3 = gameObject.transform.Find("Karts (2)").gameObject;
         karts4= gameObject.transform.Find("Karts (3)").gameObject;
+        karts5= gameObject.transform.Find("Karts (4)").gameObject;
         startPosition = gameObject.transform.Find("Start");
         endPosition = gameObject.transform.Find("End");
         begin = startPosition.position;
@@ -34,6 +36,7 @@ public class Minekarts : MonoBehaviour
         karts2.SetActive(false);
         karts3.SetActive(false);
         karts4.SetActive(false);
+        karts5.SetActive(false);
         spawnCountdown = spawnRate;
     }
 
@@ -86,7 +89,7 @@ public class Minekarts : MonoBehaviour
             }
             else if (!karts4.activeInHierarchy)
             {
-                karts3.SetActive(true);
+                karts4.SetActive(true);
                 karts4.GetComponent<BoxCollider2D>().offset = new Vector2(-4, 0);
                 karts4.GetComponent<BoxCollider2D>().size = new Vector2(2, 1);
                 karts4.transform.GetChild(0).gameObject.SetActive(true);
@@ -95,6 +98,19 @@ public class Minekarts : MonoBehaviour
                 karts4.transform.GetChild(3).gameObject.SetActive(false);
                 karts4.transform.GetChild(4).gameObject.SetActive(false);
                 karts4.transform.position = new Vector2(begin.x + 4, begin.y);
+                spawnCountdown = spawnRate;
+            }
+            else if (!karts5.activeInHierarchy)
+            {
+                karts5.SetActive(true);
+                karts5.GetComponent<BoxCollider2D>().offset = new Vector2(-4, 0);
+                karts5.GetComponent<BoxCollider2D>().size = new Vector2(2, 1);
+                karts5.transform.GetChild(0).gameObject.SetActive(true);
+                karts5.transform.GetChild(1).gameObject.SetActive(false);
+                karts5.transform.GetChild(2).gameObject.SetActive(false);
+                karts5.transform.GetChild(3).gameObject.SetActive(false);
+                karts5.transform.GetChild(4).gameObject.SetActive(false);
+                karts5.transform.position = new Vector2(begin.x + 4, begin.y);
                 spawnCountdown = spawnRate;
             }
             else
@@ -106,6 +122,7 @@ public class Minekarts : MonoBehaviour
         karts2.transform.position = Vector3.MoveTowards(karts2.transform.position, new Vector3(end.x - 5, end.y,end.z), movementSpeed * Time.deltaTime);
         karts3.transform.position = Vector3.MoveTowards(karts3.transform.position, new Vector3(end.x - 5, end.y,end.z), movementSpeed * Time.deltaTime);
         karts4.transform.position = Vector3.MoveTowards(karts4.transform.position, new Vector3(end.x - 5, end.y,end.z), movementSpeed * Time.deltaTime);
+        karts5.transform.position = Vector3.MoveTowards(karts5.transform.position, new Vector3(end.x - 5, end.y, end.z), movementSpeed * Time.deltaTime);
 
         //spawning & despawning the first set of karts after initialization
         if (karts.activeSelf)
@@ -113,35 +130,35 @@ public class Minekarts : MonoBehaviour
             if (karts.transform.position.x <= begin.x + 2 && !karts.transform.GetChild(1).gameObject.activeInHierarchy)
             {
                 karts.GetComponent<BoxCollider2D>().offset = new Vector2(-3, 0);
-                karts.GetComponent<BoxCollider2D>().size = new Vector2(4, 1);
+                karts.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
                 karts.transform.GetChild(1).gameObject.SetActive(true);
             }
 
             if (karts.transform.position.x <= begin.x && !karts.transform.GetChild(2).gameObject.activeInHierarchy)
             {
                 karts.GetComponent<BoxCollider2D>().offset = new Vector2(-2, 0);
-                karts.GetComponent<BoxCollider2D>().size = new Vector2(6, 1);
+                karts.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
                 karts.transform.GetChild(2).gameObject.SetActive(true);
             }
 
             if (karts.transform.position.x <= begin.x - 2 && !karts.transform.GetChild(3).gameObject.activeInHierarchy)
             {
                 karts.GetComponent<BoxCollider2D>().offset = new Vector2(-1, 0);
-                karts.GetComponent<BoxCollider2D>().size = new Vector2(8, 1);
+                karts.GetComponent<BoxCollider2D>().size = new Vector2(8, 2);
                 karts.transform.GetChild(3).gameObject.SetActive(true);
             }
 
             if (karts.transform.position.x <= begin.x - 4 && !karts.transform.GetChild(4).gameObject.activeInHierarchy)
             {
                 karts.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
-                karts.GetComponent<BoxCollider2D>().size = new Vector2(10, 1);
+                karts.GetComponent<BoxCollider2D>().size = new Vector2(10, 2);
                 karts.transform.GetChild(4).gameObject.SetActive(true);
             }
 
             if (karts.transform.position.x <= end.x + 4 && karts.transform.GetChild(0).gameObject.activeInHierarchy)
             {
                 karts.GetComponent<BoxCollider2D>().offset = new Vector2(1, 0);
-                karts.GetComponent<BoxCollider2D>().size = new Vector2(8, 1);
+                karts.GetComponent<BoxCollider2D>().size = new Vector2(8, 2);
                 karts.transform.GetChild(0).gameObject.SetActive(false);
                 despawning = true;
             }
@@ -149,21 +166,21 @@ public class Minekarts : MonoBehaviour
             if (karts.transform.position.x <= end.x + 2 && karts.transform.GetChild(1).gameObject.activeInHierarchy)
             {
                 karts.GetComponent<BoxCollider2D>().offset = new Vector2(2, 0);
-                karts.GetComponent<BoxCollider2D>().size = new Vector2(6, 1);
+                karts.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
                 karts.transform.GetChild(1).gameObject.SetActive(false);
             }
 
             if (karts.transform.position.x <= end.x && karts.transform.GetChild(2).gameObject.activeInHierarchy)
             {
                 karts.GetComponent<BoxCollider2D>().offset = new Vector2(3, 0);
-                karts.GetComponent<BoxCollider2D>().size = new Vector2(4, 1);
+                karts.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
                 karts.transform.GetChild(2).gameObject.SetActive(false);
             }
 
             if (karts.transform.position.x <= end.x - 2 && karts.transform.GetChild(3).gameObject.activeInHierarchy)
             {
                 karts.GetComponent<BoxCollider2D>().offset = new Vector2(4, 0);
-                karts.GetComponent<BoxCollider2D>().size = new Vector2(2, 1);
+                karts.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
                 karts.transform.GetChild(3).gameObject.SetActive(false);
             }
 
@@ -181,35 +198,35 @@ public class Minekarts : MonoBehaviour
             if (karts2.transform.position.x <= begin.x + 2 && !karts2.transform.GetChild(1).gameObject.activeSelf)
             {
                 karts2.GetComponent<BoxCollider2D>().offset = new Vector2(-3, 0);
-                karts2.GetComponent<BoxCollider2D>().size = new Vector2(4, 1);
+                karts2.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
                 karts2.transform.GetChild(1).gameObject.SetActive(true);
             }
 
             if (karts2.transform.position.x <= begin.x && !karts2.transform.GetChild(2).gameObject.activeSelf)
             {
                 karts2.GetComponent<BoxCollider2D>().offset = new Vector2(-2, 0);
-                karts2.GetComponent<BoxCollider2D>().size = new Vector2(6, 1);
+                karts2.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
                 karts2.transform.GetChild(2).gameObject.SetActive(true);
             }
 
             if (karts2.transform.position.x <= begin.x - 2 && !karts2.transform.GetChild(3).gameObject.activeSelf)
             {
                 karts2.GetComponent<BoxCollider2D>().offset = new Vector2(-1, 0);
-                karts2.GetComponent<BoxCollider2D>().size = new Vector2(8, 1);
+                karts2.GetComponent<BoxCollider2D>().size = new Vector2(8, 2);
                 karts2.transform.GetChild(3).gameObject.SetActive(true);
             }
 
             if (karts2.transform.position.x <= begin.x - 4 && !karts2.transform.GetChild(4).gameObject.activeSelf)
             {
                 karts2.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
-                karts2.GetComponent<BoxCollider2D>().size = new Vector2(10, 1);
+                karts2.GetComponent<BoxCollider2D>().size = new Vector2(10, 2);
                 karts2.transform.GetChild(4).gameObject.SetActive(true);
             }
 
             if (karts2.transform.position.x <= end.x + 4 && karts2.transform.GetChild(0).gameObject.activeSelf)
             {
                 karts2.GetComponent<BoxCollider2D>().offset = new Vector2(1, 0);
-                karts2.GetComponent<BoxCollider2D>().size = new Vector2(8, 1);
+                karts2.GetComponent<BoxCollider2D>().size = new Vector2(8, 2);
                 karts2.transform.GetChild(0).gameObject.SetActive(false);
                 despawning = true;
             }
@@ -217,21 +234,21 @@ public class Minekarts : MonoBehaviour
             if (karts2.transform.position.x <= end.x + 2 && karts2.transform.GetChild(1).gameObject.activeSelf)
             {
                 karts2.GetComponent<BoxCollider2D>().offset = new Vector2(2, 0);
-                karts2.GetComponent<BoxCollider2D>().size = new Vector2(6, 1);
+                karts2.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
                 karts2.transform.GetChild(1).gameObject.SetActive(false);
             }
 
             if (karts2.transform.position.x <= end.x && karts2.transform.GetChild(2).gameObject.activeSelf)
             {
                 karts2.GetComponent<BoxCollider2D>().offset = new Vector2(3, 0);
-                karts2.GetComponent<BoxCollider2D>().size = new Vector2(4, 1);
+                karts2.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
                 karts2.transform.GetChild(2).gameObject.SetActive(false);
             }
 
             if (karts2.transform.position.x <= end.x - 2 && karts2.transform.GetChild(3).gameObject.activeSelf)
             {
                 karts2.GetComponent<BoxCollider2D>().offset = new Vector2(4, 0);
-                karts2.GetComponent<BoxCollider2D>().size = new Vector2(2, 1);
+                karts2.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
                 karts2.transform.GetChild(3).gameObject.SetActive(false);
             }
 
@@ -248,35 +265,35 @@ public class Minekarts : MonoBehaviour
             if (karts3.transform.position.x <= begin.x + 2 && !karts3.transform.GetChild(1).gameObject.activeSelf)
             {
                 karts3.GetComponent<BoxCollider2D>().offset = new Vector2(-3, 0);
-                karts3.GetComponent<BoxCollider2D>().size = new Vector2(4, 1);
+                karts3.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
                 karts3.transform.GetChild(1).gameObject.SetActive(true);
             }
 
             if (karts3.transform.position.x <= begin.x && !karts3.transform.GetChild(2).gameObject.activeSelf)
             {
                 karts3.GetComponent<BoxCollider2D>().offset = new Vector2(-2, 0);
-                karts3.GetComponent<BoxCollider2D>().size = new Vector2(6, 1);
+                karts3.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
                 karts3.transform.GetChild(2).gameObject.SetActive(true);
             }
 
             if (karts3.transform.position.x <= begin.x - 2 && !karts3.transform.GetChild(3).gameObject.activeSelf)
             {
                 karts3.GetComponent<BoxCollider2D>().offset = new Vector2(-1, 0);
-                karts3.GetComponent<BoxCollider2D>().size = new Vector2(8, 1);
+                karts3.GetComponent<BoxCollider2D>().size = new Vector2(8,2);
                 karts3.transform.GetChild(3).gameObject.SetActive(true);
             }
 
             if (karts3.transform.position.x <= begin.x - 4 && !karts3.transform.GetChild(4).gameObject.activeSelf)
             {
                 karts3.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
-                karts3.GetComponent<BoxCollider2D>().size = new Vector2(10, 1);
+                karts3.GetComponent<BoxCollider2D>().size = new Vector2(10, 2);
                 karts3.transform.GetChild(4).gameObject.SetActive(true);
             }
 
             if (karts3.transform.position.x <= end.x + 4 && karts3.transform.GetChild(0).gameObject.activeSelf)
             {
                 karts3.GetComponent<BoxCollider2D>().offset = new Vector2(1, 0);
-                karts3.GetComponent<BoxCollider2D>().size = new Vector2(8, 1);
+                karts3.GetComponent<BoxCollider2D>().size = new Vector2(8, 2);
                 karts3.transform.GetChild(0).gameObject.SetActive(false);
                 despawning = true;
             }
@@ -284,21 +301,21 @@ public class Minekarts : MonoBehaviour
             if (karts3.transform.position.x <= end.x + 2 && karts3.transform.GetChild(1).gameObject.activeSelf)
             {
                 karts3.GetComponent<BoxCollider2D>().offset = new Vector2(2, 0);
-                karts3.GetComponent<BoxCollider2D>().size = new Vector2(6, 1);
+                karts3.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
                 karts3.transform.GetChild(1).gameObject.SetActive(false);
             }
 
             if (karts3.transform.position.x <= end.x && karts3.transform.GetChild(2).gameObject.activeSelf)
             {
                 karts3.GetComponent<BoxCollider2D>().offset = new Vector2(3, 0);
-                karts3.GetComponent<BoxCollider2D>().size = new Vector2(4, 1);
+                karts3.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
                 karts3.transform.GetChild(2).gameObject.SetActive(false);
             }
 
             if (karts3.transform.position.x <= end.x - 2 && karts3.transform.GetChild(3).gameObject.activeSelf)
             {
                 karts3.GetComponent<BoxCollider2D>().offset = new Vector2(4, 0);
-                karts3.GetComponent<BoxCollider2D>().size = new Vector2(2, 1);
+                karts3.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
                 karts3.transform.GetChild(3).gameObject.SetActive(false);
             }
 
@@ -310,40 +327,40 @@ public class Minekarts : MonoBehaviour
         }
 
         //and fourth
-        if(karts4.activeSelf)
+        if (karts4.activeSelf)
         { 
             if (karts4.transform.position.x <= begin.x + 2 && !karts4.transform.GetChild(1).gameObject.activeSelf)
             {
                 karts4.GetComponent<BoxCollider2D>().offset = new Vector2(-3, 0);
-                karts4.GetComponent<BoxCollider2D>().size = new Vector2(4, 1);
+                karts4.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
                 karts4.transform.GetChild(1).gameObject.SetActive(true);
             }
 
             if (karts4.transform.position.x <= begin.x && !karts4.transform.GetChild(2).gameObject.activeSelf)
             {
                 karts4.GetComponent<BoxCollider2D>().offset = new Vector2(-2, 0);
-                karts4.GetComponent<BoxCollider2D>().size = new Vector2(6, 1);
+                karts4.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
                 karts4.transform.GetChild(2).gameObject.SetActive(true);
             }
 
             if (karts4.transform.position.x <= begin.x - 2 && !karts4.transform.GetChild(3).gameObject.activeSelf)
             {
                 karts4.GetComponent<BoxCollider2D>().offset = new Vector2(-1, 0);
-                karts4.GetComponent<BoxCollider2D>().size = new Vector2(8, 1);
+                karts4.GetComponent<BoxCollider2D>().size = new Vector2(8, 2);
                 karts4.transform.GetChild(3).gameObject.SetActive(true);
             }
 
             if (karts4.transform.position.x <= begin.x - 4 && !karts4.transform.GetChild(4).gameObject.activeSelf)
             {
                 karts4.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
-                karts4.GetComponent<BoxCollider2D>().size = new Vector2(10, 1);
+                karts4.GetComponent<BoxCollider2D>().size = new Vector2(10, 2);
                 karts4.transform.GetChild(4).gameObject.SetActive(true);
             }
 
             if (karts4.transform.position.x <= end.x + 4 && karts4.transform.GetChild(0).gameObject.activeSelf)
             {
                 karts4.GetComponent<BoxCollider2D>().offset = new Vector2(1, 0);
-                karts4.GetComponent<BoxCollider2D>().size = new Vector2(8, 1);
+                karts4.GetComponent<BoxCollider2D>().size = new Vector2(8, 2);
                 karts4.transform.GetChild(0).gameObject.SetActive(false);
                 despawning = true;
             }
@@ -351,21 +368,21 @@ public class Minekarts : MonoBehaviour
             if (karts4.transform.position.x <= end.x + 2 && karts4.transform.GetChild(1).gameObject.activeSelf)
             {
                 karts4.GetComponent<BoxCollider2D>().offset = new Vector2(2, 0);
-                karts4.GetComponent<BoxCollider2D>().size = new Vector2(6, 1);
+                karts4.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
                 karts4.transform.GetChild(1).gameObject.SetActive(false);
             }
 
             if (karts4.transform.position.x <= end.x && karts4.transform.GetChild(2).gameObject.activeSelf)
             {
                 karts4.GetComponent<BoxCollider2D>().offset = new Vector2(3, 0);
-                karts4.GetComponent<BoxCollider2D>().size = new Vector2(4, 1);
+                karts4.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
                 karts4.transform.GetChild(2).gameObject.SetActive(false);
             }
 
             if (karts4.transform.position.x <= end.x - 2 && karts4.transform.GetChild(3).gameObject.activeSelf)
             {
                 karts4.GetComponent<BoxCollider2D>().offset = new Vector2(4, 0);
-                karts4.GetComponent<BoxCollider2D>().size = new Vector2(2, 1);
+                karts4.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
                 karts4.transform.GetChild(3).gameObject.SetActive(false);
             }
 
@@ -376,6 +393,71 @@ public class Minekarts : MonoBehaviour
             }
         }
 
+        //and fifth
+        if (karts5.activeSelf)
+        {
+            if (karts5.transform.position.x <= begin.x + 2 && !karts5.transform.GetChild(1).gameObject.activeSelf)
+            {
+                karts5.GetComponent<BoxCollider2D>().offset = new Vector2(-3, 0);
+                karts5.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
+                karts5.transform.GetChild(1).gameObject.SetActive(true);
+            }
 
+            if (karts5.transform.position.x <= begin.x && !karts5.transform.GetChild(2).gameObject.activeSelf)
+            {
+                karts5.GetComponent<BoxCollider2D>().offset = new Vector2(-2, 0);
+                karts5.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
+                karts5.transform.GetChild(2).gameObject.SetActive(true);
+            }
+
+            if (karts5.transform.position.x <= begin.x - 2 && !karts5.transform.GetChild(3).gameObject.activeSelf)
+            {
+                karts5.GetComponent<BoxCollider2D>().offset = new Vector2(-1, 0);
+                karts5.GetComponent<BoxCollider2D>().size = new Vector2(8, 2);
+                karts5.transform.GetChild(3).gameObject.SetActive(true);
+            }
+
+            if (karts5.transform.position.x <= begin.x - 4 && !karts5.transform.GetChild(4).gameObject.activeSelf)
+            {
+                karts5.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
+                karts5.GetComponent<BoxCollider2D>().size = new Vector2(10, 2);
+                karts5.transform.GetChild(4).gameObject.SetActive(true);
+            }
+
+            if (karts5.transform.position.x <= end.x + 4 && karts5.transform.GetChild(0).gameObject.activeSelf)
+            {
+                karts5.GetComponent<BoxCollider2D>().offset = new Vector2(1, 0);
+                karts5.GetComponent<BoxCollider2D>().size = new Vector2(8, 2);
+                karts5.transform.GetChild(0).gameObject.SetActive(false);
+                despawning = true;
+            }
+
+            if (karts5.transform.position.x <= end.x + 2 && karts5.transform.GetChild(1).gameObject.activeSelf)
+            {
+                karts5.GetComponent<BoxCollider2D>().offset = new Vector2(2, 0);
+                karts5.GetComponent<BoxCollider2D>().size = new Vector2(6, 2);
+                karts5.transform.GetChild(1).gameObject.SetActive(false);
+            }
+
+            if (karts5.transform.position.x <= end.x && karts5.transform.GetChild(2).gameObject.activeSelf)
+            {
+                karts5.GetComponent<BoxCollider2D>().offset = new Vector2(3, 0);
+                karts5.GetComponent<BoxCollider2D>().size = new Vector2(4, 2);
+                karts5.transform.GetChild(2).gameObject.SetActive(false);
+            }
+
+            if (karts5.transform.position.x <= end.x - 2 && karts5.transform.GetChild(3).gameObject.activeSelf)
+            {
+                karts5.GetComponent<BoxCollider2D>().offset = new Vector2(4, 0);
+                karts5.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
+                karts5.transform.GetChild(3).gameObject.SetActive(false);
+            }
+
+            if (karts5.transform.position.x <= end.x - 4 && karts5.transform.GetChild(4).gameObject.activeSelf)
+            {
+                karts5.SetActive(false);
+                despawning = false;
+            }
+        }
     }
 }

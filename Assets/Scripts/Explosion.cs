@@ -27,7 +27,7 @@ public class Explosion : MonoBehaviour
             PlayerHealth e = collision.GetComponent<PlayerHealth>();
             if (e != null)
             {
-                e.currentHealth -= damage;
+                e.TakeDamange(damage);
                 Debug.Log(e.currentHealth);
                 Debug.Log("attack hit player");
             }
@@ -38,7 +38,7 @@ public class Explosion : MonoBehaviour
             Enemy e = collision.GetComponent<Enemy>();
             if (e != null)
             {
-                e.health -= damage;
+                e.TakeDamange(damage,gameObject);
                 Debug.Log(e.health);
                 Debug.Log("attack hit enemy");
             }

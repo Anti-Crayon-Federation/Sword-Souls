@@ -30,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            attackHit.size = new Vector2(2.25f, 1.75f);
+            attackHit.size = new Vector2(2.5f, 2.85f);
         }
         attackHit.isTrigger = true;
     }
@@ -64,7 +64,9 @@ public class PlayerAttack : MonoBehaviour
                 e.TakeDamange(1, player.gameObject);
                 Debug.Log(e.health);
                 //Debug.Log("destroy attack");
-                Destroy(gameObject);
+                attackHit.enabled = false;
+                
+                //Destroy(gameObject);
             }
             else
             {

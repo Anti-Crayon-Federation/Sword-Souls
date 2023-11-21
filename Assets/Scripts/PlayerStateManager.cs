@@ -160,6 +160,11 @@ public class PlayerStateManager : MonoBehaviour
                 ChangeStateTo(PlayerState.Dashing);
             }
         }
+
+        if (Input.GetButtonDown("Respawn"))
+        {
+            h.ResetPlayer();
+        }
     }
 
     private void DetermineDirection()

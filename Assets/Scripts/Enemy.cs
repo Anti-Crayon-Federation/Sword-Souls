@@ -19,11 +19,17 @@ public class Enemy : EnemyStateManager
         if (takeDamageTimer > 0)
         {
             takeDamageTimer -= Time.deltaTime;
-            sr.color = Color.red;
+            if (sr)
+            {
+                sr.color = Color.red;
+            }
         }
         else
         {
-            sr.color = Color.white;
+            if (sr)
+            {
+                sr.color = Color.white;
+            }
         }
 
         base.Update();

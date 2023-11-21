@@ -318,6 +318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door Button
       objectReference: {fileID: 0}
+    - target: {fileID: 24880044373350059, guid: bc12925460c9d784dabea81002ade388, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4961997522368141226, guid: bc12925460c9d784dabea81002ade388, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -446,7 +450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847125279693995122, guid: b0ab3ade3625fee42b79897f1f824799, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3847125279693995122, guid: b0ab3ade3625fee42b79897f1f824799, type: 3}
       propertyPath: m_LocalRotation.w

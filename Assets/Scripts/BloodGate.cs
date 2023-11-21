@@ -15,15 +15,13 @@ public class BloodGate : MonoBehaviour
     public string enemyTag = "Enemy";
     private bool isEnemyInside = true; // Is the enemy inside the area
     public GameObject doorThatWillOpen;
-    public Sprite redLight;
-    public Sprite greenLight;
 
     // Start is called before the first frame update
     void Start()
     {
         doorThatWillOpen = gameObject.transform.GetChild(0).gameObject;
         doorThatWillOpen.GetComponent<DoorBehaviour>().enabled = false;
-        doorThatWillOpen.transform.Find("LightGreen").gameObject.GetComponent<SpriteRenderer>().sprite = redLight;
+        doorThatWillOpen.transform.Find("LightGreen").gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("LightRed");
     }
 
     // Update is called once per frame
@@ -36,7 +34,7 @@ public class BloodGate : MonoBehaviour
         if (!isEnemyInside)
         {
             doorThatWillOpen.GetComponent<DoorBehaviour>().enabled = true;
-            doorThatWillOpen.transform.Find("LightGreen").gameObject.GetComponent<SpriteRenderer>().sprite = greenLight;
+            doorThatWillOpen.transform.Find("LightGreen").gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("LightGreen");
             gameObject.GetComponent<BloodGate>().enabled = false;
         }
     }
