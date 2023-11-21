@@ -10,14 +10,16 @@ public class ProjectileSystem : MonoBehaviour
     [SerializeField]
     private float maxDetectionDistance = 10f;
     // The CircleCollider2D that represents the detection radius
-    public CircleCollider2D detectionRadius; 
-
+    private CircleCollider2D detectionRadius;
+    public float bulletSpeed = 1f;
+    public float spawnInterval = 1f;
     private float timer;
     private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        detectionRadius = GetComponent<CircleCollider2D>();
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class ProjectileSystem : MonoBehaviour
         if (distance < maxDetectionDistance)
         {
             timer += Time.deltaTime;
-            if (timer > 2)
+            if (timer > spawnInterval)
             {
                 timer = 0;
                 shoot();
@@ -41,6 +43,7 @@ public class ProjectileSystem : MonoBehaviour
 
     void shoot()
     {
-        Instantiate(bullet, bulletPos.position, Quaternion.identity);
+        GameObject go = Instantiate(bullet, bulletPos.position, Quaternion.identity);
+        go.GetComponent<EnemyBullet>().force = bulletSpeed;
     }
 }
